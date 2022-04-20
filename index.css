@@ -55,6 +55,9 @@ body {
 	font-size: 14px;
 	white-space: nowrap;
 }
+button.button:active{
+	transform: scale(0.95);
+}
 .button:not(:last-child) {
 	margin-right: 30px;
 }
@@ -108,6 +111,9 @@ body {
 		margin-top: 30px;
 		margin-bottom: 130px;
 		white-space: nowrap;
+	}
+	button.submit-button:active{
+		transform: scale(0.95);
 	}
 
 	.email {

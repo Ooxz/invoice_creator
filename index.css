@@ -2,7 +2,6 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Inter', sans-serif;
-	/* background-color: #1F2937; */
 	color: white;
 	max-width: 1030px;
 }
@@ -90,7 +89,7 @@ button.button:active{
 
 	.priceDiv {
 		display: flex;
-		justify-content: flex-end;
+		justify-content: space-between;
 
 	}
 	.total-price {
@@ -119,3 +118,33 @@ button.button:active{
 	.email {
 		margin-right: 15px;
 	}
+
+	ul{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;	
+}
+	.liClass {
+		color: white;
+		font-size: 20px;
+		margin-top: 20px;
+	}
+
+	.liBtnClass {
+		color: white;
+		background: none;
+		border: none;
+		font-size: 10px;
+		margin-left: 20px;
+	}
+
+	#li1BtnId{
+		margin-left: 30px;
+	}
+	
+	.spanClass {
+		color: white;
+		font-size: 24px;
+		margin-left: auto;
+	}
+	

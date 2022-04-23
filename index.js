@@ -16,7 +16,10 @@ let ulEl = document.getElementById("ul-el")
 let washCar = 10
 let mowLawn = 20
 let pullWeeds = 30
-let totalSum = 0
+// let totalSum = 0
+let totalSum = {
+	addvalues: 0
+}
 let total = document.getElementById("total")
 
 
@@ -80,97 +83,109 @@ li3.appendChild(span3);
 span3.textContent = `${pullWeeds}$`;
 span3.id = "span3Id";
 span3.className = "spanClass";
-// let li1 = `<li id="li1">wash car<button type="button" class='button' id='removeButton1'>remove</button>$10</li>`
-// let li2 = `<li>Mow Lawn<button type="button" class='button' id='removeButton2'>remove</button>$20</li>`
-// let li3 = `<li>Pull Weeds<button type="button" class="button" id='removeButton3'>remove</button>$30</li>`
+
 
 
 btn1.addEventListener('click', function () {
 	li1.style.cssText = "display: flex"
+	totalSum.addvalues += washCar //add the value to the total first
+	total.innerHTML = totalSum.addvalues + "$" // then declare the total in innherHTML
+	btn1.disabled = true
 	
-	total.innerHTML += `${washCar}$`
 	
 	console.log(total.innerHTML)
 })
 
 li1Btn.addEventListener('click', function () {
 	li1.style.cssText = "display: none"
-	total.innerHTML -= `${washCar}$`
-	total.innerHTML = `${totalSum}`
-	// total.innerHTML -= `${washCar}$`
-	// total.innerHTML = `$${totalSum}`
-	// console.log(total.innerHTML)
+	totalSum.addvalues -= washCar
+	total.innerHTML = totalSum.addvalues + "$"
+	btn1.disabled = false
 })
 
 btn2.addEventListener('click', function () {
 	li2.style.cssText = "display: flex"
-	let result = mowLawn + totalSum
-	total.innerHTML = `${result}$`
-	console.log(totalSum)
+	totalSum.addvalues += mowLawn
+	total.innerHTML = totalSum.addvalues + "$"
+	btn2.disabled = true
 })
 
 li2Btn.addEventListener('click', function () {
 	li2.style.cssText = "display: none"
-	let result =  totalSum - mowLawn 
-	total.innerHTML = `${result}$`
+	totalSum.addvalues -= mowLawn
+	total.innerHTML = totalSum.addvalues + "$"
+	btn2.disabled = false
 })
 
 btn3.addEventListener('click', function () {
 	li3.style.cssText = "display: flex"
+	totalSum.addvalues += pullWeeds
+	total.innerHTML = totalSum.addvalues + "$"
+	btn3.disabled = true
 })
 
 li3Btn.addEventListener('click', function () {
 	li3.style.cssText = "display: none"
+	totalSum.addvalues -= pullWeeds
+	total.innerHTML = totalSum.addvalues + "$"
+	btn3.disabled = false
 })
 
-//addeventlisteners for buttons
-// btn1.addEventListener('click', function() {
-	
-// 	ulEl.innerHTML += li1;
-// 	li1 = `<li id="li1">wash car<button type="button" class='button' id='removeButton1'>remove</button>$10</li>`
-// 	let li1Id = document.getElementById('removeButton1');
-// 	li1Id.addEventListener('click', function() {
-// 		console.log('esesesee')
-// 		li1Id.parentElement.remove();
-// 	})
-// // ulEl.insertAdjacentHTML("afterbegin", li1);
-// })
-
-// btn2.addEventListener('click', function() {
-// 	ulEl.innerHTML += li2;
-// 	li2 = `<li>Mow Lawn<button type="button" class='button' id='removeButton2'>remove</button>$20</li>`
-// 	let li2Id = document.getElementById('removeButton2');
-// li2Id.addEventListener('click', function() {
-// 	console.log('esesesee')
-// 	li2Id.parentElement.remove();
-// })
-// // ulEl.insertAdjacentHTML("afterend", li2);
-// })
 
 
-// // cp2.addEventListener('click', function() {
-// // 	ulEl.removeChild(cp2);
-// // 	console.log(cp2);
-// // });
+// modal
 
-// btn3.addEventListener('click', function() {
-// 	ulEl.innerHTML += li3;
-// 	li3 = `<li>Pull Weeds<button type="button" class="button" id='removeButton3'>remove</button>$30</li>`
-// 	let li3Id = document.getElementById('removeButton3');
-// 	li3Id.addEventListener('click', function() {
-// 		console.log('esesesee')
-// 		li3Id.parentElement.remove();
-// 	})
-// // ulEl.insertAdjacentHTML("afterend", li3);
-// })
+// Modal to display a message when the use try to enter an unothorized number in input
 
-// //addeventlistener for submit button
-// submitBtn.addEventListener('click', function() {
-// 	alert('You clicked submit');
-// })
+const modalbg = document.querySelector(".bground"); //background
+let modalTextId = document.getElementById("modalTextId")
 
-// //addeventlistener for remove buttons
-// // li1Id.addEventListener('click', test, false)
-// // 	function test() {
-// // 		console.log('esesesee')
-// // 	  }
+// launch modal form
+function launchModal() {
+	modalbg.style.display = "flex";
+	modalTextId.innerText = `Thank you 
+	for your purchase! 
+	Your total is 
+	${totalSum.addvalues}$`
+  }
+  
+ // Get the modal
+ var modal = document.getElementById("myModal");
+
+ // Get the button that close the modal
+ var thanksBtn = document.getElementById("thanksBtn");
+ 
+ // Get the <span> element that closes the modal
+ var span = document.getElementsByClassName("closeMod")[0];
+ 
+ // When the user clicks on <span> (x), close the modal
+ span.onclick = function() {
+	modal.style.display = "none";
+	window.location.reload();
+  }
+
+ //Close function button "fermer"
+ thanksBtn.addEventListener('click', (event) => {
+   event.preventDefault();
+   modal.style.display = "none";
+   window.location.reload(); // reload the page after closing the modal
+   });
+
+ 
+   //clicking outside of the modalbg will close it
+  window.onclick = function(event) {
+    if (event.target == modalbg) {
+      modalbg.style.display = "none";
+    }
+  }
+
+//addeventlistener for submit button
+submitBtn.addEventListener('click', function() {
+	ulEl.innerHTML = "";
+	total.innerHTML = "";
+	launchModal();
+	// alert(`Thank you for your purchase! Your total is ${totalSum.addvalues}$`)
+	btn1.disabled = false
+	btn2.disabled = false
+	btn3.disabled = false
+})
